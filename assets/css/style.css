@@ -1,65 +1,89 @@
+@charset "UTF-8";
 /* =====================================================================
-   ScholarHub — forest / sage green theme, dim-white surfaces, dark mode
+   ScholarHub — পুরো সাইটের একটাই CSS ফাইল (Bootstrap 5-এর উপরে বসানো)
+
+   মূল নিয়ম তিনটি:
+   ১. পেজের বেশিরভাগ অংশ নিরপেক্ষ ধূসর/সাদা — রং কম
+   ২. accent রং একটাই — সবুজ (--primary); শুধু ক্লিক করার জিনিসে:
+      button, link, active menu, focus ring
+   ৩. status-এর রং (হলুদ/সবুজ/লাল) শুধু অবস্থা বোঝাতেই, সাজানোর জন্য নয়
+
+   নিচের ভেরিয়েবল (--নাম) গুলো বদলালেই গোটা সাইটের চেহারা বদলায় —
+   আলাদা করে কোনো পেজের CSS-এ হাত দিতে হয় না।
    ===================================================================== */
 
-/* ---------- Light theme tokens ---------- */
+/* ---------- লাইট থিমের ভেরিয়েবল ----------
+   ডার্ক থিমের মতোই কাঠামো: পেজের একটা base টোন, তার থেকে এক ধাপ আলাদা
+   card-এর টোন, স্পষ্ট border আর গাঢ় লেখা — যাতে সবুজ রংটা ফুটে ওঠার
+   মতো একটা পটভূমি পায়, সবকিছু সাদায় মিশে না যায়। */
 :root, [data-bs-theme="light"] {
-  --bg:          #edf1ea;   /* dim sage page background */
-  --surface:     #f8f9f5;   /* dim white cards (not pure white) */
-  --surface-2:   #f1f4ed;
-  --surface-3:   #e6ece2;
-  --border:      #dae2d4;
-  --border-strong: #c6d2bf;
-  --text:        #1d2a22;
-  --heading:     #163a2b;
-  --muted:       #66756b;
+  --bg:          #e6ebe9;   /* পুরো পেজের background */
+  --surface:     #eff0f0;   /* card / box-এর ভেতরের রং */
+  --surface-2:   #f0f2f4;   /* table-এর header, input-এর ভেতর, ছোট chip */
+  --surface-3:   #e1e5e9;   /* progress bar-এর খালি অংশ ইত্যাদি */
+  --border:      #d9dde2;   /* সাধারণ দাগ/বিভাজন রেখা */
+  --border-strong: #b5c4bb; /* card-এর border — স্পষ্ট দেখা যায় এমন */
+  --text:        #15181c;   /* সাধারণ লেখা */
+  --heading:     #0e1216;   /* হেডিং ও বড় সংখ্যা */
+  --muted:       #5a616b;   /* গৌণ/ছোট লেখা, icon */
 
-  --primary:        #2d6a4f;  /* forest green */
-  --primary-hover:  #245a42;
-  --primary-strong: #1b4332;
-  --primary-contrast: #ffffff;
-  --accent:         #52b788;  /* fresh leaf green */
-  --accent-soft:    #d7eedf;  /* light green */
-  --accent-softer:  #e8f4eb;
-  --ring: rgba(82, 183, 136, .28);
+  /* সবুজ — এই শেডটাই পুরো সাইটে: button, link, sidebar-এর highlight */
+  --primary:        #087567; /* মূল সবুজ — button-এর background */
+  --primary-hover:  #004e4a; /* মাউস রাখলে */
+  --primary-strong: #043f32; /* চাপ দিলে, বা গাঢ় সবুজ লেখা */
+  --primary-contrast: #ffffff; /* সবুজের উপরে যে লেখা বসে তার রং */
+  --accent:         #4fa89b; /* হালকা সবুজ — border, icon */
+  --accent-soft:    #bfd9d1; /* হালকা সবুজ tint — নির্বাচিত row/tab */
+  --accent-softer:  #d1e5e7; /* আরও হালকা — table row-এ মাউস রাখলে */
+  --ring: rgba(15, 138, 127, .26); /* focus করলে চারপাশের আভা */
 
-  --sidebar-bg:     #173b2c;
-  --sidebar-bg-2:   #1c4534;
-  --sidebar-text:   #c5d9cc;
-  --sidebar-muted:  #86a594;
-  --sidebar-active: rgba(149, 213, 178, .14);
-  --sidebar-accent: #95d5b2;
+  /* বাঁ পাশের panel — লাইট ও ডার্ক দুই মোডেই কালচে থাকে */
+  --sidebar-bg:     #151a1d;
+  --sidebar-bg-2:   #171b1e;
+  --sidebar-text:   #c7d0d0; /* menu-র লেখা */
+  --sidebar-muted:  #797f89; /* "OVERVIEW"-এর মতো ছোট লেবেল */
+  --sidebar-active: rgba(79, 179, 165, .16); /* active menu-র হালকা সবুজ box */
+  --sidebar-accent: #24f0d5;                 /* active menu-র দাগ, icon ও count */
 
-  --topbar-bg: rgba(248, 249, 245, .86);
-  --shadow-sm: 0 1px 2px rgba(22, 58, 43, .05);
-  --shadow-md: 0 10px 30px -12px rgba(22, 58, 43, .22);
-  --shadow-lg: 0 24px 60px -20px rgba(22, 58, 43, .35);
+--topbar-bg:   #e0e7e7;    /* উপরের bar — --surface-এর সমান রাখা ভালো */
+  /* card-এর ছায়া — পেজ থেকে একটু উঁচু দেখানোর জন্য */
+  --shadow-sm: 0 1px 2px rgba(16, 20, 24, .05), 0 8px 20px -8px rgba(16, 20, 24, .14);
+  --shadow-md: 0 10px 30px -12px rgba(16, 20, 24, .22);
+  --shadow-lg: 0 24px 60px -20px rgba(16, 20, 24, .3);
 
-  --pending-bg: #fbf1d9; --pending-fg: #86601a; --pending-bd: #efd9a6;
-  --ok-bg: #dcefe2;      --ok-fg: #1f6040;      --ok-bd: #b5dcc2;
-  --bad-bg: #f8e3e1;     --bad-fg: #a1342c;     --bad-bd: #eec3be;
-  --neutral-bg: #e9ede6; --neutral-fg: #5d6b62; --neutral-bd: #d5ddd0;
-  --info-bg: #e1ecf2;    --info-fg: #2c5872;    --info-bd: #c3d8e4;
+  /* status-এর রং — যথেষ্ট গাঢ়, যাতে সাদার উপরে ফ্যাকাশে না লাগে।
+     -bg = ভেতরের রং, -fg = লেখার রং, -bd = border */
+  --pending-bg: #fbe7b4; --pending-fg: #7a4a08; --pending-bd: #edd490; /* অপেক্ষমাণ */
+  --ok-bg: #bfddd4;      --ok-fg: #0b5049;      --ok-bd: #93c3b7;      /* অনুমোদিত / সফল */
+  --bad-bg: #f8d3cd;     --bad-fg: #9c2018;     --bad-bd: #eeaca3;     /* বাতিল / ব্যর্থ */
+  --neutral-bg: #e3e7ec; --neutral-fg: #464d57; --neutral-bd: #ccd2da; /* বন্ধ / নিরপেক্ষ */
+  --info-bg: #d2e3f5;    --info-fg: #17417f;    --info-bd: #aecbec;    /* তথ্য */
+  /* অল্প কিছু জায়গায় (যেমন type badge) সামান্য রঙের বৈচিত্র্যের জন্য */
+  --tone-indigo-bg: #dce1fa; --tone-indigo-fg: #2f2a92;
+  --tone-teal-bg:   #c3eee4; --tone-teal-fg:   #0a6a60;
 
-  --radius: 10px;
-  --radius-sm: 7px;
-  --ease: cubic-bezier(.2, .7, .2, 1);
+  --radius: 14px;      /* card/box-এর কোণের গোলাই */
+  --radius-sm: 9px;    /* button/input-এর কোণের গোলাই */
+  --ease: cubic-bezier(.2, .7, .2, 1); /* animation-এর গতির ধরন */
 }
 
-/* ---------- Dark theme tokens ---------- */
+/* ---------- ডার্ক থিমের ভেরিয়েবল ----------
+   ভেরিয়েবলের নাম হুবহু একই, শুধু মান আলাদা। <html>-এ
+   data-bs-theme="dark" বসলেই এই মানগুলো কার্যকর হয়। */
 [data-bs-theme="dark"] {
-  --bg:          #0e1612;
-  --surface:     #151f19;
-  --surface-2:   #1a261f;
-  --surface-3:   #213027;
-  --border:      #26372d;
-  --border-strong: #33483b;
-  --text:        #dfe9e2;
-  --heading:     #e9f3ec;
-  --muted:       #92a598;
+  --bg:          #0d0f12;   /* পেজের background */
+  --surface:     #16181c;   /* card / box */
+  --surface-2:   #1d2024;
+  --surface-3:   #262a30;
+  --border:      #2a2e34;
+  --border-strong: #3a3f47;
+  --text:        #e3e5e9;
+  --heading:     #f5f6f8;
+  --muted:       #8d93a0;
 
-  --primary:        #52b788;
-  --primary-hover:  #66c597;
+  /* সবুজ — কালচে background-এ পড়ার মতো একটু হালকা শেড */
+  --primary:        #52b795;
+  --primary-hover:  #5baf86;
   --primary-strong: #95d5b2;
   --primary-contrast: #0c1510;
   --accent:         #74c69d;
@@ -67,26 +91,31 @@
   --accent-softer:  rgba(82, 183, 136, .08);
   --ring: rgba(116, 198, 157, .30);
 
-  --sidebar-bg:     #0b120e;
-  --sidebar-bg-2:   #101a14;
-  --sidebar-text:   #b9cbbf;
-  --sidebar-muted:  #6f8577;
+  --sidebar-bg:     #0a0c0e;
+  --sidebar-bg-2:   #101318;
+  --sidebar-text:   #c7cad0;
+  --sidebar-muted:  #767c86;
   --sidebar-active: rgba(116, 198, 157, .12);
   --sidebar-accent: #74c69d;
 
-  --topbar-bg: rgba(21, 31, 25, .86);
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .3);
-  --shadow-md: 0 10px 30px -12px rgba(0, 0, 0, .6);
-  --shadow-lg: 0 24px 60px -20px rgba(0, 0, 0, .7);
+  --topbar-bg: rgba(22, 24, 28, .86);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .35), 0 8px 20px -6px rgba(0, 0, 0, .4);
+  --shadow-md: 0 10px 30px -12px rgba(0, 0, 0, .65);
+  --shadow-lg: 0 24px 60px -20px rgba(0, 0, 0, .75);
 
-  --pending-bg: rgba(226, 178, 80, .14); --pending-fg: #e6c27a; --pending-bd: rgba(226, 178, 80, .3);
+  /* ডার্কে status-এর fill স্বচ্ছ (transparent), উপরে উজ্জ্বল লেখা */
+  --pending-bg: rgba(245, 158, 11, .15); --pending-fg: #fbbf24; --pending-bd: rgba(245, 158, 11, .3);
   --ok-bg: rgba(82, 183, 136, .15);      --ok-fg: #86d4ab;      --ok-bd: rgba(82, 183, 136, .32);
-  --bad-bg: rgba(224, 108, 98, .14);     --bad-fg: #eea198;     --bad-bd: rgba(224, 108, 98, .3);
-  --neutral-bg: rgba(160, 180, 168, .1); --neutral-fg: #a7b8ad; --neutral-bd: rgba(160, 180, 168, .2);
-  --info-bg: rgba(110, 170, 210, .13);   --info-fg: #9fcbe6;    --info-bd: rgba(110, 170, 210, .28);
+  --bad-bg: rgba(239, 68, 68, .15);      --bad-fg: #fca5a5;     --bad-bd: rgba(239, 68, 68, .3);
+  --neutral-bg: rgba(148, 163, 184, .1); --neutral-fg: #a3a9b3; --neutral-bd: rgba(148, 163, 184, .2);
+  --info-bg: rgba(59, 130, 246, .14);    --info-fg: #93c5fd;    --info-bd: rgba(59, 130, 246, .28);
+  --tone-indigo-bg: rgba(99, 102, 241, .16); --tone-indigo-fg: #a5b4fc;
+  --tone-teal-bg:   rgba(20, 184, 166, .16); --tone-teal-fg:   #5eead4;
 }
 
-/* ---------- Bootstrap bridge ---------- */
+/* ---------- Bootstrap-এর সাথে সংযোগ ----------
+   Bootstrap-এর নিজের ভেরিয়েবলগুলোকে আমাদের ভেরিয়েবলে বেঁধে দেওয়া হচ্ছে,
+   নাহলে Bootstrap-এর ডিফল্ট নীল রং মাঝেমধ্যে উঁকি দেয়। */
 :root, [data-bs-theme] {
   --bs-body-font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --bs-body-color: var(--text);
@@ -102,7 +131,7 @@
   --bs-heading-color: var(--heading);
   --bs-focus-ring-color: var(--ring);
 }
-[data-bs-theme="dark"] { --bs-link-color-rgb: 82, 183, 136; --bs-link-hover-color-rgb: 149, 213, 178; }
+[data-bs-theme="dark"] { --bs-link-color-rgb: 82, 183, 136; --bs-link-hover-color-rgb: 149, 213, 178; --bs-btn-focus-shadow-rgb: 82, 183, 136; }
 
 [hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
@@ -123,7 +152,7 @@ hr { border-color: var(--border); opacity: 1; }
 code { color: var(--primary-strong); font-size: .9em; }
 [data-bs-theme="dark"] code { color: var(--primary-strong); }
 
-/* ---------- Buttons ---------- */
+/* ---------- বাটন ---------- */
 .btn {
   font-weight: 500; border-radius: var(--radius-sm); padding: .5rem 1rem;
   transition: background-color .15s var(--ease), border-color .15s var(--ease), color .15s var(--ease), box-shadow .15s var(--ease), transform .1s var(--ease);
@@ -134,25 +163,23 @@ code { color: var(--primary-strong); font-size: .9em; }
 .btn-sm { padding: .32rem .7rem; font-size: 13px; }
 .btn-lg { padding: .75rem 1.25rem; font-size: 15.5px; }
 .btn i { margin-right: .2rem; }
+/* মূল বাটন — ভরাট সবুজ। হালকা pastel নয় বলে স্পষ্ট চোখে পড়ে। */
 .btn-primary {
   --bs-btn-color: var(--primary-contrast); --bs-btn-bg: var(--primary); --bs-btn-border-color: var(--primary);
   --bs-btn-hover-color: var(--primary-contrast); --bs-btn-hover-bg: var(--primary-hover); --bs-btn-hover-border-color: var(--primary-hover);
   --bs-btn-active-color: var(--primary-contrast); --bs-btn-active-bg: var(--primary-strong); --bs-btn-active-border-color: var(--primary-strong);
   --bs-btn-disabled-color: var(--primary-contrast); --bs-btn-disabled-bg: var(--primary); --bs-btn-disabled-border-color: var(--primary);
-  box-shadow: 0 1px 0 rgba(255,255,255,.08) inset, 0 1px 2px rgba(22,58,43,.2);
+  box-shadow: 0 1px 0 rgba(255,255,255,.1) inset, 0 8px 18px -6px var(--ring);
 }
-.btn-outline-primary {
-  --bs-btn-color: var(--primary); --bs-btn-bg: transparent; --bs-btn-border-color: var(--border-strong);
-  --bs-btn-hover-color: var(--primary-strong); --bs-btn-hover-bg: var(--accent-softer); --bs-btn-hover-border-color: var(--accent);
-  --bs-btn-active-color: var(--primary-strong); --bs-btn-active-bg: var(--accent-soft); --bs-btn-active-border-color: var(--accent);
-  --bs-btn-disabled-color: var(--muted); --bs-btn-disabled-bg: transparent; --bs-btn-disabled-border-color: var(--border);
+/* বাকি সবুজ বাটনগুলোও (.btn-outline-primary, .btn-soft) ঠিক একই ভরাট সবুজ।
+   আগে এগুলো হালকা tint ছিল বলে পাশাপাশি রাখলে ফ্যাকাশে লাগত। */
+.btn-outline-primary, .btn-soft {
+  --bs-btn-color: var(--primary-contrast); --bs-btn-bg: var(--primary); --bs-btn-border-color: var(--primary);
+  --bs-btn-hover-color: var(--primary-contrast); --bs-btn-hover-bg: var(--primary-hover); --bs-btn-hover-border-color: var(--primary-hover);
+  --bs-btn-active-color: var(--primary-contrast); --bs-btn-active-bg: var(--primary-strong); --bs-btn-active-border-color: var(--primary-strong);
+  --bs-btn-disabled-color: var(--muted); --bs-btn-disabled-bg: var(--surface-2); --bs-btn-disabled-border-color: var(--border);
+  box-shadow: 0 1px 0 rgba(255,255,255,.1) inset, 0 8px 18px -6px var(--ring);
 }
-.btn-soft {
-  --bs-btn-color: var(--primary-strong); --bs-btn-bg: var(--accent-soft); --bs-btn-border-color: transparent;
-  --bs-btn-hover-color: var(--primary-strong); --bs-btn-hover-bg: var(--accent); --bs-btn-hover-border-color: transparent;
-  --bs-btn-active-color: var(--primary-contrast); --bs-btn-active-bg: var(--primary); --bs-btn-active-border-color: transparent;
-}
-[data-bs-theme="dark"] .btn-soft { --bs-btn-hover-color: #0c1510; }
 .btn-success {
   --bs-btn-color: var(--primary-contrast); --bs-btn-bg: var(--primary); --bs-btn-border-color: var(--primary);
   --bs-btn-hover-color: var(--primary-contrast); --bs-btn-hover-bg: var(--primary-hover); --bs-btn-hover-border-color: var(--primary-hover);
@@ -187,7 +214,7 @@ code { color: var(--primary-strong); font-size: .9em; }
 [data-bs-theme="dark"] .theme-icon-light { display: none; }
 [data-bs-theme="dark"] .theme-icon-dark { display: inline; }
 
-/* ---------- Forms ---------- */
+/* ---------- ফর্ম ও ইনপুট ---------- */
 .form-label { font-weight: 500; font-size: 13.5px; margin-bottom: .35rem; color: var(--text); }
 .form-label .req { color: var(--bad-fg); margin-left: 2px; }
 .form-control, .form-select {
@@ -218,7 +245,7 @@ code { color: var(--primary-strong); font-size: .9em; }
 .password-toggle { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); border: 0; background: none; color: var(--muted); padding: .35rem .55rem; border-radius: 5px; }
 .password-toggle:hover { color: var(--primary); }
 
-/* ---------- Alerts ---------- */
+/* ---------- সতর্কবার্তা (alert) ---------- */
 .alert { display: flex; gap: .65rem; align-items: flex-start; border-radius: var(--radius); font-size: 14px; padding: .85rem 1rem; border: 1px solid transparent; }
 .alert > i { font-size: 1.05rem; line-height: 1.35; }
 .alert ul { margin: .25rem 0 0; padding-left: 1.1rem; }
@@ -229,7 +256,7 @@ code { color: var(--primary-strong); font-size: .9em; }
 .alert-info    { background: var(--info-bg); color: var(--info-fg); border-color: var(--info-bd); }
 [data-bs-theme="dark"] .btn-close { filter: invert(1) grayscale(1) brightness(1.6); }
 
-/* ---------- App shell ---------- */
+/* ---------- মূল কাঠামো: বাঁ পাশের panel + উপরের bar ---------- */
 .app-shell { display: flex; min-height: 100vh; }
 .app-sidebar {
   width: 252px; flex-shrink: 0;
@@ -244,16 +271,16 @@ code { color: var(--primary-strong); font-size: .9em; }
 .brand-mark {
   width: 38px; height: 38px; border-radius: 9px; flex-shrink: 0;
   display: inline-flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, #52b788, #2d6a4f); color: #fff; font-size: 1.15rem;
+  background: linear-gradient(135deg, var(--accent), var(--primary-strong)); color: #fff; font-size: 1.15rem;
   box-shadow: 0 6px 14px -6px rgba(82, 183, 136, .6);
 }
 .brand-text { font-weight: 650; font-size: 16.5px; line-height: 1.1; letter-spacing: -.01em; }
 .brand-text small { display: block; font-weight: 400; font-size: 11.5px; color: var(--sidebar-muted); margin-top: 2px; letter-spacing: .02em; }
-.sidebar-nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
-.sidebar-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: .1em; color: var(--sidebar-muted); font-weight: 600; padding: .9rem .75rem .4rem; }
+.sidebar-nav { display: flex; flex-direction: column; gap: 3px; flex: 1; }
+.sidebar-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: .1em; color: var(--sidebar-muted); font-weight: 600; padding: 1.1rem .75rem .5rem; }
 .sidebar-link {
   position: relative; display: flex; align-items: center; gap: .75rem;
-  padding: .58rem .75rem; border-radius: 8px; color: var(--sidebar-text); font-weight: 500;
+  padding: .65rem .8rem; border-radius: 9px; color: var(--sidebar-text); font-weight: 500;
   transition: background-color .15s var(--ease), color .15s var(--ease);
 }
 .sidebar-link i { font-size: 1.05rem; opacity: .85; }
@@ -271,8 +298,8 @@ code { color: var(--primary-strong); font-size: .9em; }
 
 .app-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .topbar {
-  position: sticky; top: 0; z-index: 1030; height: 64px;
-  display: flex; align-items: center; gap: .75rem; padding: 0 1.75rem;
+  position: sticky; top: 0; z-index: 1030; height: 70px;
+  display: flex; align-items: center; gap: .75rem; padding: 0 2rem;
   background: var(--topbar-bg); backdrop-filter: saturate(160%) blur(10px); -webkit-backdrop-filter: saturate(160%) blur(10px);
   border-bottom: 1px solid var(--border);
 }
@@ -295,94 +322,106 @@ code { color: var(--primary-strong); font-size: .9em; }
 .dropdown-item:hover, .dropdown-item:focus { background: var(--accent-softer); color: var(--primary-strong); text-decoration: none; }
 .dropdown-item:active, .dropdown-item.active { background: var(--accent-soft); color: var(--primary-strong); }
 
-.app-content { flex: 1; padding: 1.75rem 1.75rem 1rem; display: flex; flex-direction: column; max-width: 1480px; width: 100%; }
+.app-content { flex: 1; padding: 2.1rem 2rem 1.25rem; display: flex; flex-direction: column; max-width: 1480px; width: 100%; }
 .app-content > .btn { align-self: flex-start; }
 .app-footer { margin-top: auto; padding: 1.5rem 0 .5rem; color: var(--muted); font-size: 12.5px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 .app-content > .app-footer { margin-top: auto; }
 main.app-content > :not(.app-footer):last-of-type { margin-bottom: 2rem; }
 
-/* ---------- Page header ---------- */
+/* ---------- পেজের হেডিং অংশ ---------- */
 .breadcrumb-lite { font-size: 13px; color: var(--muted); margin-bottom: .45rem; }
 .breadcrumb-lite a { color: var(--muted); }
 .breadcrumb-lite a:hover { color: var(--primary); }
-.page-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.page-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.25rem; }
 .page-title { font-size: 23px; font-weight: 650; margin: 0; color: var(--heading); letter-spacing: -.02em; }
-.page-subtitle { margin: .3rem 0 0; color: var(--muted); font-size: 14px; }
+.page-subtitle { margin: .4rem 0 0; color: var(--muted); font-size: 14px; }
 .page-header .btn { white-space: nowrap; }
 .page-actions { display: flex; gap: .5rem; flex-wrap: wrap; }
 
-/* ---------- Cards ---------- */
-.content-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem 1.4rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm); transition: background-color .25s var(--ease), border-color .25s var(--ease); }
+/* ---------- কার্ড / বক্স ---------- */
+/* card আলাদা বোঝা যায় ফাঁকা জায়গা + border + হালকা ছায়া দিয়ে */
+.content-card { background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--radius); padding: 1.6rem 1.75rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm); transition: background-color .25s var(--ease), border-color .25s var(--ease); }
 .row > [class*="col"] > .content-card { margin-bottom: 0; }
-.card-heading { font-size: 15px; font-weight: 600; color: var(--heading); margin: 0 0 1rem; display: flex; justify-content: space-between; align-items: center; gap: .75rem; flex-wrap: wrap; }
-.card-heading > span > i, .card-heading > i { color: var(--accent); margin-right: .4rem; }
+.card-heading { font-size: 13px; font-weight: 650; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin: 0 0 1.35rem; display: flex; justify-content: space-between; align-items: center; gap: .75rem; flex-wrap: wrap; }
+.card-heading > span > i, .card-heading > i { color: var(--primary); margin-right: .4rem; }
 .small-link { font-size: 13px; font-weight: 500; }
 
-/* ---------- Stats ---------- */
-.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
-.stat-card { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.05rem 1.15rem; box-shadow: var(--shadow-sm); display: flex; gap: .9rem; align-items: flex-start; overflow: hidden; }
-.stat-icon { width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 1.15rem; background: var(--accent-soft); color: var(--primary); }
-.stat-icon.tone-amber { background: var(--pending-bg); color: var(--pending-fg); }
-.stat-icon.tone-deep { background: var(--primary); color: var(--primary-contrast); }
-.stat-icon.tone-sage { background: var(--surface-3); color: var(--primary-strong); }
-.stat-label { font-size: 12.5px; color: var(--muted); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.stat-card > div { min-width: 0; }
-.stat-value { font-size: 24px; font-weight: 650; color: var(--heading); margin-top: .1rem; line-height: 1.2; letter-spacing: -.02em; }
-.stat-value small { font-size: 13px; color: var(--muted); font-weight: 500; letter-spacing: 0; }
-.stat-link { font-size: 12.5px; display: inline-block; margin-top: .2rem; }
+/* ---------- ড্যাশবোর্ডের সংখ্যার কার্ড ---------- */
 
-/* ---------- Tables ---------- */
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.1rem; margin-bottom: 2rem; }
+.stat-card { position: relative; background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--radius); padding: 1.4rem 1.4rem; box-shadow: var(--shadow-sm); display: flex; gap: .75rem; align-items: flex-start; overflow: hidden; }
+/* icon = শুধু চিহ্নটুকু — পেছনে কোনো রঙিন box, border বা ছায়া নেই।
+   ৪২px-এর box সরানোয় লেখাগুলোও জায়গা পেয়েছে, তাই "PENDING REVIEW" /
+   "FEES COLLECTED" আর ভেঙে দুই লাইনে যায় না। */
+.stat-icon, .stat-icon.tone-amber, .stat-icon.tone-deep, .stat-icon.tone-sage {
+  background: none; color: var(--muted);
+}
+.stat-icon { width: auto; height: auto; border-radius: 0; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 1.2rem; line-height: 1; margin-top: .1rem; box-shadow: none; border: none; }
+.stat-label { font-size: 12px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: .04em; }
+/* label → সংখ্যা → link, তিনটার মাঝে সমান ফাঁক (gap) — গায়ে গায়ে লাগানো নয় */
+.stat-card > div { min-width: 0; display: flex; flex-direction: column; gap: .55rem; }
+.stat-value { font-size: 25px; font-weight: 650; color: var(--heading); line-height: 1; letter-spacing: -.02em; }
+.stat-value small { font-size: 13px; color: var(--muted); font-weight: 500; letter-spacing: 0; }
+.stat-link { font-size: 12.5px; display: inline-block; }
+
+/* ---------- টেবিল ---------- */
 .table { --bs-table-bg: transparent; --bs-table-color: var(--text); --bs-table-border-color: var(--border); --bs-table-hover-bg: var(--accent-softer); --bs-table-hover-color: var(--text); }
 .app-table { margin: 0; font-size: 14px; }
-.app-table thead th { background: var(--surface-2); color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid var(--border); padding: .7rem .85rem; white-space: nowrap; }
+.app-table thead th { background: var(--surface-2); color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid var(--border); padding: .9rem 1rem; white-space: nowrap; }
 .app-table thead th:first-child { border-top-left-radius: 8px; }
 .app-table thead th:last-child { border-top-right-radius: 8px; }
-.app-table td { padding: .8rem .85rem; vertical-align: middle; border-color: var(--border); }
+.app-table td { padding: 1rem 1rem; vertical-align: middle; border-color: var(--border); }
 .app-table tbody tr { transition: background-color .15s var(--ease), opacity .3s var(--ease); }
 .app-table tbody tr:hover { background: var(--accent-softer); }
 .app-table tbody tr.is-selected { background: var(--accent-soft); }
 .app-table tbody tr:last-child td { border-bottom: 0; }
 .app-table tr.row-removing { opacity: 0; }
 .app-table .check-col { width: 36px; }
-.id-pill { font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; font-size: 12.5px; font-weight: 600; color: var(--primary-strong); background: var(--accent-softer); border: 1px solid var(--accent-soft); border-radius: 5px; padding: .1rem .42rem; white-space: nowrap; }
-a.id-pill:hover { background: var(--accent-soft); text-decoration: none; }
+.id-pill { font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; font-size: 12.5px; font-weight: 600; color: var(--text); background: var(--surface-2); border: 1px solid var(--border); border-radius: 5px; padding: .1rem .42rem; white-space: nowrap; }
+a.id-pill:hover { background: var(--surface-3); text-decoration: none; }
 .cell-sub { display: block; font-size: 12.5px; color: var(--muted); }
 
-/* ---------- Badges ---------- */
-.status-badge { display: inline-flex; align-items: center; gap: .35rem; font-size: 12px; font-weight: 600; padding: .22rem .6rem; border-radius: 999px; border: 1px solid; white-space: nowrap; }
-.status-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .85; }
+/* ---------- স্ট্যাটাস ব্যাজ ----------
+   ভরাট রঙিন chip — শুধু রঙিন লেখা নয়, তাই এক নজরেই অবস্থা বোঝা যায়,
+   row-এর সাথে মিশে যায় না। */
+.status-badge { display: inline-flex; align-items: center; gap: .35rem; font-size: 12px; font-weight: 650; white-space: nowrap; padding: .28rem .65rem; border-radius: 999px; border: 1px solid transparent; }
+.status-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 .status-pending, .status-initiated { background: var(--pending-bg); color: var(--pending-fg); border-color: var(--pending-bd); }
 .status-approved, .status-completed, .status-open, .status-paid { background: var(--ok-bg); color: var(--ok-fg); border-color: var(--ok-bd); }
 .status-rejected, .status-failed { background: var(--bad-bg); color: var(--bad-fg); border-color: var(--bad-bd); }
 .status-closed, .status-full, .status-cancelled, .status-expired, .status-free { background: var(--neutral-bg); color: var(--neutral-fg); border-color: var(--neutral-bd); }
-.type-badge { display: inline-block; font-size: 12px; font-weight: 500; color: var(--primary-strong); background: var(--accent-soft); border-radius: 6px; padding: .16rem .55rem; white-space: nowrap; }
+.type-badge { display: inline-block; font-size: 12px; font-weight: 600; color: var(--tone-indigo-fg); background: var(--tone-indigo-bg); border-radius: 999px; padding: .2rem .6rem; white-space: nowrap; }
 .method-badge { display: inline-flex; align-items: center; gap: .35rem; font-size: 12.5px; font-weight: 600; white-space: nowrap; }
 .method-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
 .m-bkash { background: #d91e6e; } .m-nagad { background: #ee6b1f; } .m-rocket { background: #8a3a95; } .m-card { background: #2c5872; }
 .taka { font-family: "Nirmala UI", "Vrinda", "Noto Sans Bengali", "Siyam Rupali", sans-serif; font-size: 1.05em; margin-right: 1px; }
 
-/* ---------- Filter bar ---------- */
+/* ---------- ফিল্টার বার ---------- */
 .filter-bar { display: flex; justify-content: space-between; align-items: center; gap: .75rem; flex-wrap: wrap; margin-bottom: 1rem; }
 .filter-bar form, form.filter-bar { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
-.filter-bar .form-select { width: auto; min-width: 170px; max-width: 240px; }
-.filter-tabs { display: inline-flex; background: var(--surface); border: 1px solid var(--border); border-radius: 9px; padding: 3px; gap: 2px; flex-wrap: wrap; }
+/* এগুলো সরাসরি পেজের background-এর উপর বসে, তাই নিজস্ব surface + border +
+   ছায়া দেওয়া হয়েছে — নাহলে পেজের সাথে মিশে যায়। */
+.filter-bar .form-select { width: auto; min-width: 170px; max-width: 240px; background-color: var(--surface); border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+.filter-tabs { display: inline-flex; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 9px; padding: 3px; gap: 2px; flex-wrap: wrap; box-shadow: var(--shadow-sm); }
 .filter-tab { padding: .4rem .85rem; border-radius: 7px; color: var(--muted); font-weight: 500; font-size: 13.5px; transition: background-color .15s var(--ease), color .15s var(--ease); }
 .filter-tab:hover { color: var(--heading); background: var(--surface-2); text-decoration: none; }
-.filter-tab.active { background: var(--primary); color: var(--primary-contrast); }
+/* নির্বাচিত ট্যাব — বাঁ পাশের panel-এর active menu-র মতো হালকা সবুজ tint
+   ও মোটা লেখা, ভরাট রং নয়। */
+.filter-tab.active { background: var(--accent-soft); color: var(--primary-strong); font-weight: 650; }
 .filter-tab .count { margin-left: .35rem; font-size: 11.5px; padding: 0 .4rem; border-radius: 999px; background: var(--surface-3); color: var(--muted); }
-.filter-tab.active .count { background: rgba(255,255,255,.2); color: inherit; }
+.filter-tab.active .count { background: rgba(255,255,255,.5); color: var(--primary-strong); }
 .search-box { position: relative; width: 260px; max-width: 100%; }
 .search-box i { position: absolute; left: .75rem; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
-.search-box .form-control { padding-left: 2.2rem; }
+.search-box .form-control { padding-left: 2.2rem; background-color: var(--surface); border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
 [data-live-target] { transition: opacity .2s var(--ease); }
 [data-live-target].is-loading { opacity: .45; pointer-events: none; }
 
-/* bulk actions */
+/* একসাথে অনেকগুলো সিলেক্ট করার বার */
 .bulk-bar { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; padding: .65rem .9rem; margin-bottom: .9rem; border-radius: 9px; background: var(--accent-soft); border: 1px solid var(--accent); color: var(--primary-strong); font-weight: 500; animation: fadeIn .2s var(--ease); }
 .bulk-bar .ms-auto { display: flex; gap: .5rem; }
 
-/* ---------- Detail lists ---------- */
-.detail-list { display: grid; grid-template-columns: 150px 1fr; gap: .7rem 1rem; margin: 0; font-size: 14px; }
+/* ---------- বিস্তারিত তালিকা (dt / dd) ---------- */
+.detail-list { display: grid; grid-template-columns: 150px 1fr; gap: .9rem 1rem; margin: 0; font-size: 14px; }
 .detail-list dt { color: var(--muted); font-weight: 500; }
 .detail-list dd { margin: 0; overflow-wrap: anywhere; }
 .slot-bar { height: 6px; background: var(--surface-3); border-radius: 999px; overflow: hidden; margin: .4rem 0 .6rem; }
@@ -390,7 +429,7 @@ a.id-pill:hover { background: var(--accent-soft); text-decoration: none; }
 .empty-state { text-align: center; color: var(--muted); padding: 2.5rem 1rem; }
 .empty-state i { display: block; font-size: 2rem; color: var(--accent); opacity: .7; margin-bottom: .5rem; }
 
-/* mini bar chart (dashboard) */
+/* ড্যাশবোর্ডের ছোট বার চার্ট */
 .bar-chart { display: flex; flex-direction: column; gap: .7rem; }
 .bar-row { display: grid; grid-template-columns: 96px 1fr 88px; align-items: center; gap: .7rem; font-size: 13px; }
 .bar-track { height: 10px; background: var(--surface-3); border-radius: 999px; overflow: hidden; }
@@ -399,7 +438,7 @@ a.id-pill:hover { background: var(--accent-soft); text-decoration: none; }
 .bar-rejected { background: linear-gradient(90deg, #a1342c, #d0685f); }
 .bar-value { text-align: right; font-weight: 600; color: var(--heading); white-space: nowrap; }
 
-/* ---------- Scholarship cards ---------- */
+/* ---------- স্কলারশিপের কার্ড ---------- */
 .scholarship-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
 .scholarship-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.25rem; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); transition: border-color .2s var(--ease), box-shadow .2s var(--ease), transform .2s var(--ease); }
 .scholarship-card:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-2px); }
@@ -410,7 +449,7 @@ a.id-pill:hover { background: var(--accent-soft); text-decoration: none; }
 .sch-meta { font-size: 13px; color: var(--muted); display: flex; gap: .45rem; align-items: center; margin-bottom: .22rem; }
 .scholarship-card .mt-auto { padding-top: .85rem; }
 
-/* ---------- Decision / success ---------- */
+/* ---------- সিদ্ধান্ত ও সফল হওয়ার বার্তা ---------- */
 .decision-result { display: flex; gap: .75rem; align-items: center; padding: .95rem 1rem; border-radius: 9px; background: var(--surface-2); border: 1px solid var(--border); }
 .decision-result i { font-size: 1.4rem; }
 .decision-result.is-approved i { color: var(--ok-fg); }
@@ -418,15 +457,15 @@ a.id-pill:hover { background: var(--accent-soft); text-decoration: none; }
 .success-panel { text-align: center; padding: 2rem 1rem; }
 .big-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--accent-soft); color: var(--primary); display: inline-flex; align-items: center; justify-content: center; font-size: 1.9rem; margin-bottom: .9rem; }
 
-/* fee box on apply page */
+/* আবেদনের পেজে ফি দেখানোর বক্স */
 .fee-box { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .9rem 1rem; border-radius: 9px; background: var(--accent-softer); border: 1px dashed var(--accent); margin: .25rem 0 1rem; }
 .fee-box strong { font-size: 18px; color: var(--heading); }
 .pay-logos { display: flex; gap: .35rem; flex-wrap: wrap; }
 .pay-chip { font-size: 11.5px; font-weight: 700; padding: .15rem .45rem; border-radius: 5px; color: #fff; }
 
-/* ---------- Profile ---------- */
+/* ---------- প্রোফাইল পেজ ---------- */
 .profile-hero { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm); }
-.profile-cover { height: 110px; background: linear-gradient(120deg, #1b4332 0%, #2d6a4f 45%, #52b788 100%); position: relative; }
+.profile-cover { height: 110px; background: linear-gradient(120deg, var(--primary-strong) 0%, var(--primary) 45%, var(--accent) 100%); position: relative; }
 .profile-cover::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 85% 20%, rgba(255,255,255,.18), transparent 45%); }
 .profile-body { display: flex; align-items: flex-end; gap: 1.25rem; padding: 0 1.5rem 1.25rem; margin-top: -44px; flex-wrap: wrap; position: relative; }
 .avatar-xl { width: 96px; height: 96px; border-radius: 50%; border: 4px solid var(--surface); background: var(--accent-soft); color: var(--primary-strong); display: inline-flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 700; overflow: hidden; box-shadow: var(--shadow-md); }
@@ -455,10 +494,10 @@ a.id-pill:hover { background: var(--accent-soft); text-decoration: none; }
 .timeline li:last-child::after { display: none; }
 .timeline .when { color: var(--muted); font-size: 12px; }
 
-/* ---------- Auth pages ---------- */
+/* ---------- লগইন ও রেজিস্ট্রেশন পেজ ---------- */
 .page-plain { background: var(--bg); }
 .auth-wrapper { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
-.auth-aside { position: relative; overflow: hidden; background: linear-gradient(150deg, #173b2c 0%, #1f5039 55%, #2d6a4f 100%); color: #e8f3ec; padding: 3rem; display: flex; flex-direction: column; justify-content: space-between; }
+.auth-aside { position: relative; overflow: hidden; background: linear-gradient(150deg, var(--sidebar-bg) 0%, var(--sidebar-bg-2) 55%, var(--primary-strong) 100%); color: #e8f3ec; padding: 3rem; display: flex; flex-direction: column; justify-content: space-between; }
 .auth-aside::before { content: ""; position: absolute; width: 520px; height: 520px; border-radius: 50%; right: -180px; top: -160px; background: radial-gradient(circle, rgba(149,213,178,.22), transparent 65%); }
 .auth-aside::after { content: ""; position: absolute; width: 420px; height: 420px; border-radius: 50%; left: -160px; bottom: -180px; background: radial-gradient(circle, rgba(82,183,136,.2), transparent 65%); }
 .auth-aside > * { position: relative; z-index: 1; }
@@ -466,7 +505,7 @@ a.id-pill:hover { background: var(--accent-soft); text-decoration: none; }
 .auth-aside p { color: #b9d6c4; max-width: 420px; }
 .auth-points { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; gap: .75rem; }
 .auth-points li { display: flex; gap: .7rem; align-items: center; color: #d8ebdf; }
-.auth-points i { width: 30px; height: 30px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; background: rgba(255,255,255,.1); color: #95d5b2; }
+.auth-points i { width: 30px; height: 30px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; background: rgba(255,255,255,.1); color: var(--sidebar-accent); }
 .auth-main { display: flex; align-items: center; justify-content: center; padding: 2.5rem 1.25rem; position: relative; }
 .auth-card { width: 100%; max-width: 430px; }
 .auth-card-wide { max-width: 640px; }
@@ -487,7 +526,7 @@ a.id-pill:hover { background: var(--accent-soft); text-decoration: none; }
 .install-checks li:last-child { border-bottom: 0; }
 
 /* =====================================================================
-   PAYMENT GATEWAY  (test mode)
+   পেমেন্ট গেটওয়ে (টেস্ট মোড) — bKash / Nagad / Rocket / কার্ডের স্ক্রিন
    ===================================================================== */
 .pay-page { min-height: 100vh; background: var(--bg); display: flex; flex-direction: column; align-items: center; padding: 2rem 1rem 3rem; }
 .test-banner { width: 100%; max-width: 460px; display: flex; gap: .55rem; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 600; color: var(--pending-fg); background: var(--pending-bg); border: 1px solid var(--pending-bd); border-radius: 999px; padding: .35rem .9rem; margin-bottom: 1rem; text-align: center; }
@@ -517,7 +556,7 @@ a.id-pill:hover { background: var(--accent-soft); text-decoration: none; }
 .tile-rocket { --tile: #8a3a95; }
 .tile-card   { --tile: #2c5872; }
 
-/* wallet screen (coloured by method) */
+/* ওয়ালেটের স্ক্রিন — যে মাধ্যম, তার নিজস্ব রং ব্যবহার হয় */
 .wallet { --w: var(--primary); }
 .wallet-bkash { --w: #d91e6e; } .wallet-nagad { --w: #ee6b1f; } .wallet-rocket { --w: #8a3a95; } .wallet-card { --w: #2c5872; }
 .wallet-head { background: var(--w); color: #fff; padding: 1rem 1.3rem; display: flex; align-items: center; gap: .75rem; }
@@ -569,48 +608,48 @@ a.id-pill:hover { background: var(--accent-soft); text-decoration: none; }
 .sms-popup .msg b { color: var(--text); letter-spacing: .12em; }
 
 /* =====================================================================
-   INVOICE / PRINT DOCUMENT
+   ইনভয়েস / প্রিন্ট করার কাগজ
    ===================================================================== */
 .doc-page { background: var(--bg); min-height: 100vh; padding: 1.5rem 1rem 3rem; }
 .doc-toolbar { max-width: 820px; margin: 0 auto 1rem; display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
 .doc-toolbar .ms-auto { display: flex; gap: .5rem; flex-wrap: wrap; }
 .doc { max-width: 820px; margin: 0 auto; background: #fbfcf9; color: #1d2a22; border: 1px solid #dde4d8; border-radius: 12px; box-shadow: var(--shadow-md); padding: 2.6rem 2.8rem; position: relative; overflow: hidden; }
-.doc-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; padding-bottom: 1.4rem; border-bottom: 2px solid #2d6a4f; }
+.doc-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; padding-bottom: 1.4rem; border-bottom: 2px solid var(--primary); }
 .doc-brand { display: flex; gap: .8rem; align-items: center; min-width: 0; flex: 1; }
 .doc-title { flex-shrink: 0; }
 .doc-table .nowrap { white-space: nowrap; }
 .doc-table.compact { font-size: 12.5px; }
 .doc-table.compact td, .doc-table.compact th { padding: .55rem .5rem; }
 .doc-brand .brand-mark { width: 46px; height: 46px; font-size: 1.35rem; }
-.doc-brand h1 { font-size: 21px; font-weight: 700; margin: 0; color: #163a2b; }
-.doc-brand p { margin: 0; font-size: 12.5px; color: #66756b; }
+.doc-brand h1 { font-size: 21px; font-weight: 700; margin: 0; color: var(--heading); }
+.doc-brand p { margin: 0; font-size: 12.5px; color: var(--muted); }
 .doc-title { text-align: right; }
-.doc-title h2 { font-size: 26px; font-weight: 700; color: #2d6a4f; margin: 0; letter-spacing: .04em; }
-.doc-title p { margin: .2rem 0 0; font-size: 13px; color: #66756b; }
+.doc-title h2 { font-size: 26px; font-weight: 700; color: var(--primary); margin: 0; letter-spacing: .04em; }
+.doc-title p { margin: .2rem 0 0; font-size: 13px; color: var(--muted); }
 .doc-parties { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.6rem 0; font-size: 13.5px; }
-.doc-parties h3 { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: #66756b; margin: 0 0 .45rem; font-weight: 600; }
+.doc-parties h3 { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 .45rem; font-weight: 600; }
 .doc-parties p { margin: 0; line-height: 1.55; }
 .doc-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-bottom: 1.2rem; }
-.doc-table th { background: #e8f1e9; color: #163a2b; text-align: left; font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; padding: .65rem .8rem; }
-.doc-table td { padding: .75rem .8rem; border-bottom: 1px solid #e3e9df; vertical-align: top; }
+.doc-table th { background: var(--surface-2); color: var(--heading); text-align: left; font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; padding: .65rem .8rem; }
+.doc-table td { padding: .75rem .8rem; border-bottom: 1px solid var(--border); vertical-align: top; }
 .doc-table .num { text-align: right; white-space: nowrap; }
 .doc-totals { margin-left: auto; width: min(300px, 100%); font-size: 13.5px; }
 .doc-totals div { display: flex; justify-content: space-between; padding: .35rem 0; }
-.doc-totals .grand { border-top: 2px solid #2d6a4f; margin-top: .3rem; padding-top: .6rem; font-size: 17px; font-weight: 700; color: #163a2b; }
-.doc-pay { margin-top: 1.6rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: .8rem; padding: 1rem; border-radius: 10px; background: #f0f5ef; font-size: 13px; }
-.doc-pay .k { color: #66756b; font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; }
+.doc-totals .grand { border-top: 2px solid var(--primary); margin-top: .3rem; padding-top: .6rem; font-size: 17px; font-weight: 700; color: var(--heading); }
+.doc-pay { margin-top: 1.6rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: .8rem; padding: 1rem; border-radius: 10px; background: var(--surface-2); font-size: 13px; }
+.doc-pay .k { color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; }
 .doc-pay .v { font-weight: 600; margin-top: .15rem; overflow-wrap: anywhere; }
-.doc-foot { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e3e9df; font-size: 12px; color: #66756b; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-.doc-stamp { position: absolute; right: 2.4rem; top: 7.8rem; transform: rotate(-12deg); border: 3px solid #2d6a4f; color: #2d6a4f; font-weight: 800; font-size: 26px; letter-spacing: .15em; padding: .2rem .9rem; border-radius: 8px; opacity: .22; pointer-events: none; }
-.doc-stamp.unpaid { border-color: #a1342c; color: #a1342c; }
-.doc-section-title { font-size: 13px; font-weight: 700; color: #163a2b; text-transform: uppercase; letter-spacing: .06em; margin: 1.4rem 0 .6rem; }
+.doc-foot { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.doc-stamp { position: absolute; right: 2.4rem; top: 7.8rem; transform: rotate(-12deg); border: 3px solid var(--primary); color: var(--primary); font-weight: 800; font-size: 26px; letter-spacing: .15em; padding: .2rem .9rem; border-radius: 8px; opacity: .22; pointer-events: none; }
+.doc-stamp.unpaid { border-color: var(--bad-fg); color: var(--bad-fg); }
+.doc-section-title { font-size: 13px; font-weight: 700; color: var(--heading); text-transform: uppercase; letter-spacing: .06em; margin: 1.4rem 0 .6rem; }
 .doc-grid { display: grid; grid-template-columns: 170px 1fr; gap: .45rem 1rem; font-size: 13.5px; }
-.doc-grid dt { color: #66756b; font-weight: 500; }
+.doc-grid dt { color: var(--muted); font-weight: 500; }
 .doc-grid dd { margin: 0; }
-.doc-sign { display: flex; justify-content: space-between; gap: 2rem; margin-top: 3rem; font-size: 12.5px; color: #66756b; }
+.doc-sign { display: flex; justify-content: space-between; gap: 2rem; margin-top: 3rem; font-size: 12.5px; color: var(--muted); }
 .doc-sign div { border-top: 1px solid #b9c6b4; padding-top: .4rem; min-width: 180px; text-align: center; }
 
-/* ---------- Toasts & cookie notice ---------- */
+/* ---------- টোস্ট বার্তা ও কুকি নোটিশ ---------- */
 .toast-stack { position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 1090; display: flex; flex-direction: column; gap: .5rem; max-width: min(380px, calc(100vw - 2rem)); }
 .app-toast { display: flex; gap: .65rem; align-items: flex-start; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 9px; padding: .8rem .95rem; box-shadow: var(--shadow-md); font-size: 14px; opacity: 0; transform: translateY(8px); transition: opacity .25s var(--ease), transform .25s var(--ease); }
 .app-toast.show { opacity: 1; transform: none; }
@@ -626,7 +665,7 @@ a.id-pill:hover { background: var(--accent-soft); text-decoration: none; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 
-/* ---------- Responsive ---------- */
+/* ---------- ছোট স্ক্রিন (মোবাইল / ট্যাব) ---------- */
 @media (max-width: 991.98px) {
   .app-sidebar { position: fixed; left: 0; top: 0; bottom: 0; transform: translateX(-100%); transition: transform .25s var(--ease); box-shadow: var(--shadow-lg); }
   body.sidebar-open .app-sidebar { transform: none; }
@@ -647,7 +686,7 @@ a.id-pill:hover { background: var(--accent-soft); text-decoration: none; }
   .page-actions > .btn { flex: 1; padding: .45rem .6rem; font-size: 13.5px; }
   .stat-grid { grid-template-columns: 1fr 1fr; gap: .75rem; }
   .stat-card { flex-direction: column; gap: .5rem; padding: .9rem; }
-  .stat-icon { width: 36px; height: 36px; font-size: 1rem; }
+  .stat-icon { font-size: 1.05rem; margin-top: 0; }
   .stat-value { font-size: 20px; }
   .detail-list, .doc-grid { grid-template-columns: 1fr; gap: .15rem; }
   .detail-list dd, .doc-grid dd { margin-bottom: .6rem; }
@@ -667,10 +706,14 @@ a.id-pill:hover { background: var(--accent-soft); text-decoration: none; }
   .bar-row { grid-template-columns: 70px 1fr 70px; }
 }
 
-/* ---------- Print ---------- */
+/* ---------- প্রিন্ট করার সময় ---------- */
 @media print {
-  @page { size: A4; margin: 14mm; }
+
+    @page { size: A4; margin: 14mm; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
   html, body { background: #fff !important; color: #000 !important; }
+
+
   [data-bs-theme="dark"] { --surface: #fff; --surface-2: #f4f6f2; --surface-3: #eceee9; --text: #111; --heading: #111; --muted: #555; --border: #ccc; }
   .app-sidebar, .topbar, .toast-stack, .cookie-notice, .no-print, .doc-toolbar, .btn, .filter-tabs, .filter-bar form, .bulk-bar, .app-footer, .sidebar-backdrop, .breadcrumb-lite, form[data-live] { display: none !important; }
   .app-shell, .app-main { display: block; }
