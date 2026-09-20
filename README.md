@@ -1,17 +1,33 @@
 # ScholarHub — Scholarship Management System
 
 
-
 Folder: `scholarhub` · Database: `scholarhub_db`
 
-## চালানোর নিয়ম (XAMPP)
 
-| Role    | Username | Password     |
-|---------|----------|--------------|
-| Admin   | Admin1   | adminpass1   |  (Admin1 to Admin5)
-| Student | std1     | stdpass1     |  (std1 to std5, or email e.g. karim@example.com)
+## Screenshots
 
-নতুন Admin account বানাতে Register → Admin ট্যাবে code: `SH-ADMIN-2026`
+<table>
+  <tr>
+    <td><img src="screenshots/1.png" width="400"></td>
+    <td><img src="screenshots/2.png" width="400"></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/3.png" width="400"></td>
+    <td><img src="screenshots/4.png" width="400"></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/5.png" width="400"></td>
+    <td><img src="screenshots/6.png" width="400"></td>
+  </tr>
+  <tr>
+    <td colspan="2"><img src="screenshots/7.png" width="820"></td>
+  </tr>
+</table>
+
+
+
+
+
 
 
 ## Features
