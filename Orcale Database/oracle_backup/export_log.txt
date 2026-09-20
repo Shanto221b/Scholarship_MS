@@ -1,0 +1,38 @@
+
+Connected to: Oracle Database 10g Express Edition Release 10.2.0.1.0 - Production
+Export done in WE8MSWIN1252 character set and AL16UTF16 NCHAR character set
+
+About to export specified users ...
+. exporting pre-schema procedural objects and actions
+. exporting foreign function library names for user AB 
+. exporting PUBLIC type synonyms
+. exporting private type synonyms
+. exporting object type definitions for user AB 
+About to export AB's objects ...
+. exporting database links
+. exporting sequence numbers
+. exporting cluster definitions
+. about to export AB's tables via Conventional Path ...
+. . exporting table                          ADMIN          5 rows exported
+. . exporting table                    APPLICATION          4 rows exported
+. . exporting table                     DEPARTMENT          5 rows exported
+. . exporting table                    SCHOLARSHIP          5 rows exported
+. . exporting table                        STUDENT          5 rows exported
+. . exporting table                          USERS         10 rows exported
+. exporting synonyms
+. exporting views
+. exporting stored procedures
+. exporting operators
+. exporting referential integrity constraints
+. exporting triggers
+. exporting indextypes
+. exporting bitmap, functional and extensible indexes
+. exporting posttables actions
+. exporting materialized views
+. exporting snapshot logs
+. exporting job queues
+. exporting refresh groups and children
+. exporting dimensions
+. exporting post-schema procedural objects and actions
+. exporting statistics
+Export terminated successfully without warnings.

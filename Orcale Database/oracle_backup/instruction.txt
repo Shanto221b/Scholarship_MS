@@ -1,0 +1,19 @@
+পরে Oracle-এ ফেরত আনতে চাইলে
+
+Oracle আবার install করে ab user বানিয়ে cmd-তে এটা চালালেই সব ফেরত আসবে:
+
+imp ab/ab file=G:\oracle_backup\schema_backup.dmp fromuser=ab touser=ab log=G:\oracle_backup\import_log.txt
+
+
+
+ফেরত আনার সময় যা লাগবে
+
+Oracle আবার install করার পর imp চালানোর আগে ab user বানিয়ে নিতে হবে। SQL*Plus-এ system user দিয়ে ঢুকে:
+
+sql
+CREATE USER ab IDENTIFIED BY ab;
+GRANT CONNECT, RESOURCE TO ab;
+
+তারপর cmd-তে তোমার imp command চালালেই সব টেবিল ও ডেটা ফেরত আসবে।
+
+মনে রেখো, .dmp ফাইল শুধু Oracle-এই ফেরত আনা যায়। MySQL-এ ডেটা তুলতে চাইলে Oracle থাকতে থাকতে আলাদা পথে বের করে নিতে হবে। চাইলে সেটার সহজ উপায় বলে দিতে পারি।
