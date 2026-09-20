@@ -1,8 +1,6 @@
 # ScholarHub — Scholarship Management System
 
-PHP + MySQL web application. Students register, browse scholarships, pay the
-application fee (bKash / Nagad / Rocket / card) and apply; admins create
-scholarships, review applications, and manage payments and invoices.
+
 
 Folder: `scholarhub` · Database: `scholarhub_db`
 
