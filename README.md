@@ -8,15 +8,6 @@ Folder: `scholarhub` · Database: `scholarhub_db`
 
 ## চালানোর নিয়ম (XAMPP)
 
-1. zip extract করে `scholarhub` ফোল্ডারটা `C:\xampp\htdocs\` এর ভেতরে রাখো।
-2. XAMPP Control Panel থেকে **Apache** আর **MySQL** Start করো।
-3. Browser-এ যাও: `http://localhost/scholarhub/`
-4. **Setup** পেজ খুলবে → **Install database** চাপো।
-   - আগের ScholarHub ভার্সনের `scholarhub_db` থাকলেও সমস্যা নেই — নিজে থেকেই
-     Setup পেজে নিয়ে যাবে, Install চাপলে নতুন টেবিলসহ আপডেট হয়ে যাবে।
-   - অথবা phpMyAdmin → Import দিয়ে `database/scholarhub_db.sql` import করো।
-5. Login:
-
 | Role    | Username | Password     |
 |---------|----------|--------------|
 | Admin   | Admin1   | adminpass1   |  (Admin1 to Admin5)
@@ -24,28 +15,6 @@ Folder: `scholarhub` · Database: `scholarhub_db`
 
 নতুন Admin account বানাতে Register → Admin ট্যাবে code: `SH-ADMIN-2026`
 
-## Payment test credentials (PAYMENT_MODE = 'test')
-
-কোনো আসল টাকা কাটে না। Checkout পেজে এগুলো লেখাও থাকে।
-
-| Method | What to enter |
-|--------|---------------|
-| bKash  | any valid number (01XXXXXXXXX) → 6-digit code shown in the SMS pop-up → PIN `12121` |
-| Nagad  | any valid number → code → PIN `1234` |
-| Rocket | any valid number → code → PIN `1234` |
-| Card   | `4242 4242 4242 4242`, any future expiry, any CVV → 3-D Secure code |
-| Failures to try | wallet `01700000000` = insufficient balance · card `4000 0000 0000 0002` = declined · 3 wrong codes / PINs = payment failed · 10 minutes idle = checkout expired |
-
-How it works: when a student applies for a scholarship with a fee, a
-`payment` row is created (Initiated) and the student goes to the checkout.
-The application is created **only after** the payment succeeds, in one
-database transaction. A trigger gives every completed payment an invoice
-number (`INV-2026-00001`) and blocks any change to a completed payment.
-
-Going live needs a merchant account (bKash Tokenized Checkout, Nagad / Rocket
-merchant API or a card gateway such as SSLCommerz). Only
-`wallet_verify_pin()` and `card_charge()` in `includes/payment.php` need to
-call the provider; everything else stays the same.
 
 ## Features
 
