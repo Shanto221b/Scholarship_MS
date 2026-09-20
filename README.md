@@ -6,24 +6,31 @@ Folder: `scholarhub` · Database: `scholarhub_db`
 
 ## Screenshots
 
+## Screenshots
+
 <table>
   <tr>
-    <td><img src="screenshots/1.PNG" width="400"></td>
-    <td><img src="screenshots/2.PNG" width="400"></td>
+    <td><img src="screenshots/1.PNG" width="800"></td>
   </tr>
   <tr>
-    <td><img src="screenshots/3.PNG" width="400"></td>
-    <td><img src="screenshots/4.PNG" width="400"></td>
+    <td><img src="screenshots/2.PNG" width="800"></td>
   </tr>
   <tr>
-    <td><img src="screenshots/5.PNG" width="400"></td>
-    <td><img src="screenshots/6.PNG" width="400"></td>
+    <td><img src="screenshots/3.PNG" width="800"></td>
   </tr>
   <tr>
-    <td colspan="2"><img src="screenshots/7.PNG" width="820"></td>
+    <td><img src="screenshots/4.PNG" width="800"></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/5.PNG" width="800"></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/6.PNG" width="800"></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/7.PNG" width="800"></td>
   </tr>
 </table>
-
 
 
 
