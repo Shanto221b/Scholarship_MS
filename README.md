@@ -4,7 +4,6 @@
 Folder: `scholarhub` · Database: `scholarhub_db`
 
 
-## Screenshots
 
 ## Screenshots
 
